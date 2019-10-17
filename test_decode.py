@@ -7,7 +7,7 @@ c = pyfecpp.fec_code(3,10)
 
 shares = c.encode('abcdef012345')
 
-print shares
+# print shares
 
 shares = dict([share for share in zip(xrange(0,len(shares)), shares)])
 
@@ -18,8 +18,9 @@ while len(shares) > c.K:
 
 print shares
 
+c = pyfecpp.fec_code(2,10)
 dec = c.decode(shares)
 
-print dec
+# print dec
 
 print ''.join(dec)

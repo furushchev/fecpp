@@ -8,7 +8,7 @@
 #include <emmintrin.h>
 
 namespace fecpp {
-
+#ifdef HAVE_SSE2
 size_t addmul_sse2(uint8_t z[], const uint8_t x[], uint8_t y, size_t size)
    {
    const __m128i polynomial = _mm_set1_epi8(0x1D);
@@ -98,5 +98,10 @@ size_t addmul_sse2(uint8_t z[], const uint8_t x[], uint8_t y, size_t size)
 
    return consumed;
    }
-
+#else
+size_t addmul_sse2(uint8_t z[], const uint8_t x[], uint8_t y, size_t size)
+{
+  throw std::exception("SSE2 is not supported in the hardware");
+}
+#endif
 }

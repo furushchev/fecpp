@@ -8,7 +8,7 @@
 #include <tmmintrin.h>
 
 namespace fecpp {
-
+#ifdef HAVE_SSSE3
 namespace {
 
 /*
@@ -569,6 +569,11 @@ size_t addmul_ssse3(uint8_t z[], const uint8_t x[], uint8_t y, size_t size)
 
    return consumed;
    }
-
+#else
+size_t addmul_ssse3(uint8_t z[], const uint8_t x[], uint8_t y, size_t size)
+{
+  throw std::exception("SSSE3 is not supported in the hardware");
+}
+#endif
 }
 
